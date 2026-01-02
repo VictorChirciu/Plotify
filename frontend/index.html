@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="icon" type="image/png" href="src/graph.png" />
+    <title>Interactive Data Plotter</title>
+  </head>
+  <body>
+    <div
+      class="greeting-container mt-5 d-flex justify-content-center align-items-center flex-column"
+    >
+      <h1 style="font-weight: 600">Bun venit la Interactive Data Plotter</h1>
+      <p class="text-center greeting-p">
+        Aceasta aplicatie va permite adaugarea datelor si crearea graficelor in
+        baza lor <br />Cate tipuri de date doriti sa incarcati?
+      </p>
+      <div class="d-flex justify-content-center gap-3 mt-3">
+        <button class="btn btn-primary" id="btn-first-choice">
+          Un singur tip de date
+        </button>
+        <button class="btn btn-primary" id="btn-second-choice">
+          Doua tipuri de date
+        </button>
+        <button class="btn btn-primary" id="btn-third-choice">
+          Trei tipuri de date
+        </button>
+      </div>
+    </div>
+    <p class="text-center choice-output" id="choice-output"></p>
+    <!-- Un singur tip de date -->
+    <div
+      class="first-input-container justify-content-center align-items-center flex-column gap-3"
+    >
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control type-input"
+          placeholder="Ce fel de date introduceti? (ex: Temperatura, Umiditate)"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-dark btn-checker-type" type="button">
+            Salveaza
+          </button>
+        </div>
+      </div>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control data-input"
+          placeholder="Introduceti datele separate prin virgula (ex: 23,45,67)"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-dark btn-checker-data" type="button">
+            Salveaza
+          </button>
+        </div>
+      </div>
+      <!-- Example single danger button -->
+      <div class="text-center">
+        <button class="btn btn-success mt-3 btn-share-data">
+          Trimite datele
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger btn-dropdown dropdown-toggle mt-3 ms-2"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Tipul graficului
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item active disabled" href="#"
+              >Tipul graficului</a
+            >
+          </li>
+          <li><hr class="dropdown-divider" /></li>
+          <li><a class="dropdown-item" href="#">Linie</a></li>
+          <li><a class="dropdown-item" href="#">Histograma</a></li>
+          <li><a class="dropdown-item" href="#">Bara</a></li>
+        </ul>
+      </div>
+      <p class="text-center output-data"></p>
+    </div>
+
+    <!-- Doua tipuri de date -->
+    <div
+      class="second-input-container justify-content-center align-items-center flex-column gap-3"
+    >
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control type-input"
+          placeholder="Ce fel de date introduceti? (ex: Temperatura, Umiditate)"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-dark btn-checker-type" type="button">
+            Salveaza
+          </button>
+        </div>
+      </div>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control data-input"
+          placeholder="Introduceti datele separate prin virgula (ex: 23,45,67)"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-dark btn-checker-data" type="button">
+            Salveaza
+          </button>
+        </div>
+      </div>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control type-input"
+          placeholder="Ce fel de date introduceti? (ex: Temperatura, Umiditate)"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-dark btn-checker-type" type="button">
+            Salveaza
+          </button>
+        </div>
+      </div>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control data-input"
+          placeholder="Introduceti datele separate prin virgula (ex: 23,45,67)"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-dark btn-checker-data" type="button">
+            Salveaza
+          </button>
+        </div>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-success mt-3 btn-share-data">
+          Trimite datele
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger btn-dropdown dropdown-toggle mt-3 ms-2"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Tipul graficului
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item active disabled" href="#"
+              >Tipul graficului</a
+            >
+          </li>
+          <li><hr class="dropdown-divider" /></li>
+          <li><a class="dropdown-item" href="#">Linie</a></li>
+          <li><a class="dropdown-item" href="#">Histograma</a></li>
+          <li><a class="dropdown-item" href="#">Bara</a></li>
+        </ul>
+      </div>
+      <p class="text-center output-data"></p>
+    </div>
+    <!-- Trei tipuri de date -->
+    <div
+      class="third-input-container justify-content-center align-items-center flex-column gap-3"
+    >
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control type-input"
+          placeholder="Ce fel de date introduceti? (ex: Temperatura, Umiditate)"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-dark btn-checker-type" type="button">
+            Salveaza
+          </button>
+        </div>
+      </div>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control data-input"
+          placeholder="Introduceti datele separate prin virgula (ex: 23,45,67)"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-dark btn-checker-data" type="button">
+            Salveaza
+          </button>
+        </div>
+      </div>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control type-input"
+          placeholder="Ce fel de date introduceti? (ex: Temperatura, Umiditate)"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-dark btn-checker-type" type="button">
+            Salveaza
+          </button>
+        </div>
+      </div>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control data-input"
+          placeholder="Introduceti datele separate prin virgula (ex: 23,45,67)"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-dark btn-checker-data" type="button">
+            Salveaza
+          </button>
+        </div>
+      </div>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control type-input"
+          placeholder="Ce fel de date introduceti? (ex: Temperatura, Umiditate)"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-dark btn-checker-type" type="button">
+            Salveaza
+          </button>
+        </div>
+      </div>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control data-input"
+          placeholder="Introduceti datele separate prin virgula (ex: 23,45,67)"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-dark btn-checker-data" type="button">
+            Salveaza
+          </button>
+        </div>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-success mt-3 btn-share-data">
+          Trimite datele
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger btn-dropdown dropdown-toggle mt-3 ms-2"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Tipul graficului
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item active disabled" href="#"
+              >Tipul graficului</a
+            >
+          </li>
+          <li><hr class="dropdown-divider" /></li>
+          <li><a class="dropdown-item" href="#">Linie</a></li>
+          <li><a class="dropdown-item" href="#">Histograma</a></li>
+          <li><a class="dropdown-item" href="#">Bara</a></li>
+        </ul>
+      </div>
+      <p class="text-center output-data"></p>
+    </div>
+    <div class="d-flex justify-content-center align-items-center">
+      <div class="graph">
+        <h1 id="text-before-img" class="text-center"></h1>
+        <img id="plot-image" class="img-fluid mt-3 d-block mx-auto" />
+        <button
+          class="btn btn-info mt-4 mx-auto p-3"
+          onclick="saveImage()"
+          id="save-image-btn"
+        >
+          Salveaza imaginea
+        </button>
+      </div>
+    </div>
+  </body>
+  <script src="js/main.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+</html>
