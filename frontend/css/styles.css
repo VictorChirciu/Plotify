@@ -50,19 +50,28 @@
   font-weight: 600;
 }
 .graph {
-  margin-top: 60px;
-  margin-bottom: 30px;
-  /* height: 800px; */
-  width: 800px;
+  margin: 60px auto 30px;
+  width: 100%;
+  /* max-width: 1400px; It is not needed for my display. */ 
 }
-#plot-image {
-  max-width: 100%;
-  height: auto;
+
+#plots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+#plots img {
+  flex: 0 1 auto;
+  max-width: 600px;
+  min-width: 400px;
+  width: 100%;
 }
 
 #save-image-btn {
   display: none;
   font-size: 20px;
   font-weight: 500;
-  color:  #fff;
+  color: #fff;
 }

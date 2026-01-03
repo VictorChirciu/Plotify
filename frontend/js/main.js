@@ -17,6 +17,7 @@ function shareChecker(container) {
   const outputData = container.querySelector(".output-data");
   const btnShare = container.querySelector(".btn-share-data");
   const dropItems = container.querySelectorAll(".dropdown-item");
+  const plots = document.querySelector("#plots");
   let payload = [];
   let isGraphTypeSelected = false;
   let selectedGraphType = "";
@@ -27,26 +28,40 @@ function shareChecker(container) {
       selectedGraphType = item.textContent;
     }
   });
+
   if (!isGraphTypeSelected) {
     outputData.textContent = "Te rog selectează tipul graficului!";
     outputData.style.color = "red";
     return;
-    
   }
+
   for (let i = 0; i < typeInputs.length; i++) {
     const type = typeInputs[i].value.trim();
     const dataValue = dataInputs[i].value.trim();
     const isValidList = /^\d+(\.\d+)?(,\d+(\.\d+)?)*$/.test(dataValue);
 
     if (
-      type === "" ||
-      !typeInputs[i].disabled ||
-      dataValue === "" ||
-      !dataInputs[i].disabled ||
-      !isValidList
+      (type === "" || !typeInputs[i].disabled) &&
+      (dataValue === "" || !dataInputs[i].disabled)
     ) {
       outputData.textContent =
-        "Completeaza si salveaza corect toate campurile si selecteaza tipul de grafic.";
+        "Te rog completează și salvează tipul și datele!";
+      outputData.style.color = "red";
+      return;
+    }
+    if (type === "" || !typeInputs[i].disabled) {
+      outputData.textContent = "Te rog completează și salvează tipul de date!";
+      outputData.style.color = "red";
+      return;
+    }
+    if (dataValue === "" || !dataInputs[i].disabled) {
+      outputData.textContent = "Te rog completează și salvează datele!";
+      outputData.style.color = "red";
+      return;
+    }
+    if (!isValidList) {
+      outputData.textContent =
+        "Formatul datelor este greșit! Folosește: 10,3.14,2.71";
       outputData.style.color = "red";
       return;
     }
@@ -68,11 +83,21 @@ function shareChecker(container) {
     .then((response) => response.json())
     .then((data) => {
       if (data.image) {
-        const img = document.querySelector("#plot-image");
+        const row = document.createElement("div");
+        row.className = "d-flex justify-content-center";
+
+        const img = document.createElement("img");
         img.src = "data:image/png;base64," + data.image;
-        textbeforeImg.textContent = "Graficul generat:";
+        img.className = "img-fluid rounded shadow";
+        row.appendChild(img);
+        plots.appendChild(row);
+
+        textbeforeImg.textContent = "Graficele generate:";
         btnSaveImage.style.display = "block";
         clearInputFields(container);
+      } else {
+        outputData.textContent = "Eroare la generarea graficului.";
+        outputData.style.color = "red";
       }
     })
     .catch((error) => {
@@ -98,19 +123,24 @@ function toggleInput(input, button, container) {
   if (btnShare.disabled) return;
 
   input.disabled = !input.disabled;
-  button.textContent = input.disabled ? "Modifica" : "Salveaza";
+  button.textContent = input.disabled ? "Modifică" : "Salvează";
 }
 
 function saveImage() {
-  const img = document.querySelector("#plot-image");
-  if (!img.src) return;
-  const link = document.createElement("a");
-  link.href = img.src;
-  link.download = "graph.png";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+  const images = document.querySelectorAll("#plots img");
+
+  if (images.length === 0) return;
+
+  images.forEach((img, index) => {
+    const link = document.createElement("a");
+    link.href = img.src;
+    link.download = `plotify_graph_${index + 1}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
 }
+
 function clearInputFields(container) {
   const typeInputs = container.querySelectorAll(".type-input");
   const dataInputs = container.querySelectorAll(".data-input");
@@ -132,12 +162,12 @@ function clearInputFields(container) {
   });
 
   typeButtons.forEach((btn) => {
-    btn.textContent = "Salveaza";
+    btn.textContent = "Salvează";
     btn.disabled = false;
   });
 
   dataButtons.forEach((btn) => {
-    btn.textContent = "Salveaza";
+    btn.textContent = "Salvează";
     btn.disabled = false;
   });
 
@@ -145,11 +175,15 @@ function clearInputFields(container) {
   btnShare.disabled = false;
 
   outputData.textContent = "";
+  btnDropdown.textContent = "Tipul graficului";
 
   btnDropdown.textContent = "Tipul graficului";
-  for (const item of dropItems) {
+  dropItems.forEach((item, index) => {
     item.classList.remove("active", "disabled");
-  }
+    if (index === 0) {
+      item.classList.add("active", "disabled");
+    }
+  });
 }
 
 function setupContainer(container) {
