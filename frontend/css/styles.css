@@ -41,9 +41,17 @@
 .input-group {
   width: 500px !important;
 }
+.dropdown-img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
 .btn-share-data {
   width: 150px;
   margin-left: 100px;
+}
+#text-before-img {
+  margin-bottom: 30px;
 }
 #output-data {
   font-size: 16px;
@@ -52,7 +60,7 @@
 .graph {
   margin: 60px auto 30px;
   width: 100%;
-  /* max-width: 1400px; It is not needed for my display. */ 
+  /* max-width: 1400px; It is not needed for my display. */
 }
 
 #plots {

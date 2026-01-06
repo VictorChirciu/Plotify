@@ -3,9 +3,10 @@ matplotlib.use('Agg')
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import matplotlib.pyplot as plt
-import io
+import io 
 import base64
 import logging
+import random
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -41,7 +42,9 @@ def generate_plot():
         if not isinstance(datasets, list) or len(datasets) == 0:
             logger.error("Invalid data format received")
             return jsonify({"error": "Date invalide"}), 400
-
+        base_colors = ['#4E79A7','#F28E2B','#E15759','#76B7B2','#59A14F','#EDC948','#B07AA1','#FF9DA7', '#9C755F','#BAB0AC',]
+        available_colors = random.sample(base_colors, len(base_colors))
+        color_index = 0
         logger.info(f"Received datasets: {datasets}")
         graph_type = datasets[0].get("graphType", "Linie")
         logger.info(f"Generating plot of type: {graph_type}")
@@ -49,20 +52,26 @@ def generate_plot():
 
         for dataset in datasets:
             if "type" not in dataset:
-                continue
+                continue 
                 
             label = dataset["type"]
             values = [float(x) for x in dataset["data"]]
+            current_color = available_colors[color_index % len(available_colors)]
+            color_index += 1
             
             if graph_type == "Linie":
-                plt.plot(values, marker="o", label=label)
+                plt.plot(values, marker="o", label=label, color=current_color)
+                logger.info(f"Chosen color: {current_color}")
             elif graph_type == "Histogramă":
-                plt.hist(values, label=label, alpha=0.7, bins=10)
+                plt.hist(values, label=label, alpha=0.7, bins=10, color=current_color)
+                logger.info(f"Chosen color: {current_color}")
             elif graph_type == "Bară":
-                plt.bar(range(len(values)), values, label=label, alpha=0.7)
+                plt.bar(range(len(values)), values, label=label, alpha=0.7, color=current_color)
+                logger.info(f"Chosen color: {current_color}")
             else:
-                plt.plot(values, marker="o", label=label)
-
+                plt.plot(values, marker="o", label=label, color=current_color)
+                logger.info(f"Chosen color: {current_color}")
+                
         plt.title(f"Grafic date introduse - {graph_type}")
         plt.xlabel("Index")
         plt.ylabel("Valoare")

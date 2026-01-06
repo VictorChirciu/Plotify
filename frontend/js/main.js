@@ -1,4 +1,5 @@
 // Variables
+const darkMode = document.querySelector("html");
 const btnFirstChoice = document.querySelector("#btn-first-choice");
 const btnSecondChoice = document.querySelector("#btn-second-choice");
 const btnThirdChoice = document.querySelector("#btn-third-choice");
@@ -85,14 +86,19 @@ function shareChecker(container) {
       if (data.image) {
         const row = document.createElement("div");
         row.className = "d-flex justify-content-center";
-
         const img = document.createElement("img");
         img.src = "data:image/png;base64," + data.image;
         img.className = "img-fluid rounded shadow";
         row.appendChild(img);
         plots.appendChild(row);
-
-        textbeforeImg.textContent = "Graficele generate:";
+        const count = document.querySelectorAll("#plots img").length;
+        const isMultiple = count > 1;
+        btnSaveImage.textContent = isMultiple
+          ? `Salvează toate imaginile (${count})`
+          : "Salvează imaginea";
+        textbeforeImg.textContent = isMultiple
+          ? "Graficele generate:"
+          : "Graficul generat:";
         btnSaveImage.style.display = "block";
         clearInputFields(container);
       } else {
